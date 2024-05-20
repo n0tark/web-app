@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phonebook</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100">
+    <nav class="bg-indigo-400">
+        <div class="container mx-auto">
+            <div class="flex justify-between items-center py-6">
+                <a class="text-white text-3xl font-bold" href="{% url 'home' %}">Phonebook</a>
+                <button class="text-white focus:outline-none lg:hidden">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+                <div class="hidden lg:flex lg:items-center lg:w-auto" id="navbarText">
+                    <ul class="lg:flex justify-end text-lg font-bold items-center space-x-8">
+                        <li>
+                            <a class="text-white hover:text-gray-300" href="{% url 'home' %}">Home</a>
+                        </li>
+                        <li>
+                            <a class="text-white hover:text-gray-300" href="{% url 'add_contact' %}">Add
+                                Contact</a>
+                        </li>
+                        <li>
+                            <a class="text-white hover:text-gray-300" href="{% url 'phonebook' %}">All
+                                Contacts</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="bg-white w-1/2 mx-auto rounded-lg mt-6 p-4">
+        <h1 class="text-5xl font-black uppercase text-yellow-400 text-center mb-5 ">
+            Phone Book
+        </h1>
+        <div class="bg-white border border-violet-500 mx-auto overflow-hidden rounded-xl shadow-lg">
+            <table class="w-50 min-w-full border-4 border-indigo-400 divide-y divide-dashed divide-gray-200 text-lg">
+                <thead class="bg-gray-50 p-5 divide-x">
+                    <tr>
+                        <th class="px-6 py-2 text-center font-medium text-gray-500 uppercase tracking-wider">
+                            Name
+                        </th>
+                        <th class="px-6 py-2 text-center font-medium text-gray-500 uppercase tracking-wider ">
+                            Phone
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-x divide-gray-200">
+                    {% for contact in contacts %}
+                    <tr>
+                        <td class="py-3 px-5 text-center border">{{ contact.name }}</td>
+                        <td class="py-3 px-5 text-center border">{{ contact.phone_number }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

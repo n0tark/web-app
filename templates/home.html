@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phonebook</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100">
+    <nav class="bg-indigo-400">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-between items-center py-6">
+                <a class="text-white text-3xl font-bold" href="{% url 'home' %}">Phonebook</a>
+                <button class="text-white focus:outline-none lg:hidden">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+                <div class="hidden lg:flex lg:items-center lg:w-auto" id="navbarText">
+                    <ul class="lg:flex justify-end text-lg font-bold items-center space-x-8">
+                        <li>
+                            <a class="text-white hover:text-gray-300" href="{% url 'home' %}">Home</a>
+                        </li>
+                        <li>
+                            <a class="text-white hover:text-gray-300" href="{% url 'add_contact' %}">Add
+                                Contact</a>
+                        </li>
+                        <li>
+                            <a class="text-white hover:text-gray-300" href="{% url 'phonebook' %}">All
+                                Contacts</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container mx-auto p-6">
+        <div class="bg-white w-1/2 mx-auto rounded-lg border-2 border-indigo-400 p-7">
+            <h5 class="text-lg font-bold mb-4">Search</h5>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <form action="" method="get">
+                        <div class="flex items-center space-x-1">
+                            <input type="text" class="border border-gray-300 rounded-md py-2 px-3 w-full" name="query"
+                                placeholder="By name">
+                            <input type="hidden" name="search_by" value="name">
+                            <button type="submit"
+                                class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-5 rounded">Search</button>
+                        </div>
+                    </form>
+                </div>
+                <div>
+                    <form action="" method="get">
+                        <div class="flex items-center space-x-1">
+                            <input type="text" class="border border-gray-300 rounded-md py-2 px-3 w-full" name="query"
+                                placeholder="By phone">
+                            <input type="hidden" name="search_by" value="phone">
+                            <button type="submit"
+                                class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-5 rounded">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white w-1/2 mx-auto rounded-lg border-4 border-indigo-400 mt-6 p-4">
+            <table class="table-auto w-full text-center">
+                <thead>
+                    <tr>
+                        <th class="px-4 py-2">Name</th>
+                        <th class="px-4 py-2">Phones</th>
+                        <th class="px-4 py-2">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for contact in contacts %}
+                    <tr>
+                        <td class="border px-4 py-4">{{ contact.name }}</td>
+                        <td class="border px-4 py-4">{{ contact.phone_number}}</td>
+                        <td class="border px-4 py-4"><a
+                                class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+                                href="{% url 'delete_contact' contact.pk %}">Delete</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
